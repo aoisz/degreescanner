@@ -15,13 +15,16 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <style>
             html {
-                height: -webkit-fill-available;;
+                height: -webkit-fill-available;
             }
         </style>
     </head>
-    <body class="h-100">
+    <body class="h-100 position-relative">
         <div class="d-flex flex-norwrap p-0 h-100 ">
-            <?php echo "Login" ?>
+            <?php
+                echo view("components/sidebar/index");
+                echo view_cell("CertificateInfor::showForm", $data);
+            ?>
         </div>
         <script src="" async defer></script>
     </body>

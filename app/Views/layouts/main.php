@@ -1,0 +1,1 @@
+<?= $this->extend('Views/template/sidebar/index') ?>

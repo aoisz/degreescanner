@@ -22,7 +22,7 @@
     <body class="h-100">
         <div class="d-flex flex-norwrap p-0 h-100 ">
             <?php
-                require_once(realpath(dirname(__FILE__)."/../..")."/template/sidebar/index.php");
+                echo view("components/sidebar/index");
             ?>
         </div>
         <script src="" async defer></script>

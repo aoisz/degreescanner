@@ -20,9 +20,40 @@
         </style>
     </head>
     <body class="h-100">
-        <div class="d-flex flex-norwrap p-0 h-100 ">
+        <div class="d-flex flex-norwrap bg-body-secondary p-0 h-100 w-100">
             <?php
-                require_once(realpath(dirname(__FILE__)."/../..")."/template/sidebar/index.php");
+                $data = [
+                    [
+                        'id' => 1,
+                        'name' => 'TOEIC',
+                        'studentId' => '3120410019',
+                        'startDate' => '26/03/2024',
+                        'expiredDate' => '31/12/2024',
+                        'grade' => null,
+                        'score' => 990
+                    ],
+                    [
+                        'id' => 2,
+                        'name' => 'B1',
+                        'studentId' => '3120410019',
+                        'startDate' => '26/03/2024',
+                        'expiredDate' => '31/12/2024',
+                        'grade' => null,
+                        'score' => 260
+                    ],
+                    [
+                        'id' => 3,
+                        'name' => 'IELTS',
+                        'certificateId' => '1',
+                        'studentId' => '3120410019',
+                        'startDate' => '26/03/2024',
+                        'expiredDate' => '31/12/2024',
+                        'grade' => null,
+                        'score' => 9
+                    ],
+                ];
+                echo view("components/sidebar/index");
+                echo view_cell("CertificateList::showList", $data);
             ?>
         </div>
         <script src="" async defer></script>

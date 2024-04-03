@@ -2,7 +2,8 @@
     $sideBarList = array(
         "scan" => "fa-regular fa-file-image",
         "history" => "fa-regular fa-square-check",
-        "about us" => "fa-solid fa-circle-info"
+        "valid certificate" => "fa-solid fa-file-circle-check",
+        "about us" => "fa-solid fa-circle-info",
     );
     $uri = $_SERVER['REQUEST_URI'];
     $uri = trim($uri, "/");
@@ -13,26 +14,25 @@
     }
 </style>
 <div id="sidebar" class="d-flex flex-column p-3 flex-shrink-0 text-bg-dark h-100 " style="width: 280px;">
-    <a href="/" class="d-flex align-text-center text-white text-decoration-none text-center" style="min-height: 30px;">
-        <i class="fa-solid fa-bars d-flex align-items-center justify-content-center px-3" onclick=closeSideBar()></i>
-        <span class="fs-5 fw-bold hiddenItem">Degree Scanner</span>
-    </a>
+    <div class="d-flex align-text-center text-center" style="min-height: 30px;">
+        <i class="fa-solid fa-bars d-flex align-items-center justify-content-center px-3" style="cursor: pointer;" onclick=closeSideBar()></i>
+        <a href="/" class="fs-5 fw-bold text-white text-decoration-none hiddenItem">Degree Scanner</a>
+    </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <?php
             foreach($sideBarList as $name => $icon) {
                 $temp = explode(" ", $name);
                 $state = $temp[0] === $uri ? "active" : "";
-                echo '<li class="nav-item"><a href="/'.$temp[0].'/" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$icon.' pe-3 menuIcon"></i><span class="hiddenItem" style="text-transform: uppercase;">'.$name.'</span></a></li>';
+                echo '<li class="nav-item"><a href="/'.$temp[0].'" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$icon.' pe-3 menuIcon"></i><span class="text-uppercase hiddenItem">'.$name.'</span></a></li>';
             }
         ?>
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" onclick=changeDropdownIcon()>
-            <img id="siderbarAvatar" src="<?php echo base_url("img/con_meo.jpg")?>" class="rounded-circle object-fit-cover" width="32" height="32" style="margin: 0px 6px;">
-            <span class="fs-6 text-center hiddenItem" style="display:flex;align-items:center;">Thanh An</span>
-            <i id="dropdown-icon" class="fa-solid fa-angle-down ms-2 mt-1 hiddenItem" style="display:flex;align-items:center;"></i>
+        <a href="#" id="infor" class="d-flex text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" onclick=changeDropdownIcon()>
+            <span class="d-flex align-items-center fs-6 text-center hiddenItem">Thanh An</span>
+            <i id="dropdown-icon" class="d-flex align-items-center fa-solid fa-angle-down ms-2 mt-1"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a href="#" class="dropdown-item">Profile</a></li>
@@ -78,29 +78,35 @@
         let sidebar = document.getElementById("sidebar");
         let hiddenItems = document.querySelectorAll(".hiddenItem");
         let menuIcons = document.querySelectorAll(".menuIcon");
+        let infor = document.getElementById("infor");
         let siderbarAvatar = document.getElementById("siderbarAvatar");
         let currentStyle = [];
         let currentWidth = sidebar.style.width;
         for(let i = 0; i < hiddenItems.length; i++) {
-            currentStyle = [...hiddenItems[i].style,currentStyle];
+            currentStyle = [...currentStyle,hiddenItems[i].classList];
         }
         if(currentWidth === "280px") {
             sidebar.style.width = "76px";
             hiddenItems.forEach((item) => {
-                item.style.display = "none";
+                item.classList.add("d-none");
             });
             menuIcons.forEach((icon) => {
                 icon.classList.remove("pe-3");
             });
+            infor.classList.add("mx-1");
         } else {
             for(let i = 0; i < hiddenItems.length; i++) {
-                hiddenItems[i].style = currentStyle[i];
+                hiddenItems[i].classList.remove("d-none");
+                currentStyle[i].forEach((cls) => {
+                    hiddenItems[i].classList.add(cls);
+                });
+                // hiddenItems[i].classList.add(currentStyle[i]);
             }
             menuIcons.forEach((icon) => {
                 icon.classList.add("pe-3");
             });
+            infor.classList.remove("mx-1");
             sidebar.style.width = "280px";
         }
-        // console.log(sidebar);
     }
 </script>
