@@ -10,4 +10,4 @@ $routes->get('login', 'Login::index');
 // $routes->get('/(:alpha)', 'Home::changeMainContent/$1');
 $routes->get('scan', 'Scan::index');
 $routes->get('history', 'History::index');
-$routes->get('scan', 'About::index');
+$routes->get('about', 'About::index');
