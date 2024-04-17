@@ -3,8 +3,8 @@
 namespace App\Cells;
 
 class CertificateInfor {
-    public function showForm(string $data): string
+    public function showForm(array $params): string
     {
-        return view('components/certificate_infor/index', ['data' => $data]);
+        return view('components/certificate_infor/index', ['data' => $params["data"]]);
     }
 }

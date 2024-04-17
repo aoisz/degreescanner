@@ -11,7 +11,6 @@ class CertificateRow
 
     public function showRow($item): string
     {
-        
         return view("components/certificate_list/certificaterow", $item);
     }
 }
