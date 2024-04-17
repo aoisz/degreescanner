@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
@@ -53,15 +53,15 @@
 
                 </div>
                 <div class="d-flex justify-content-center align-items-center flex-fill rightPanel" style="background-color: #F8FAFC">
-                    <form method="post" class="h-100 w-100">
+                    <form action="/login/check" method="post" class="h-100 w-100">
                         <div class="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
                             <div class="form-group w-50 pb-5">
-                                <label for="email" class="form-label fw-bold">Mã số sinh viên *</label>
+                                <label for="email" class="form-label fw-bold">Mã số sinh viên <span class=" text-danger">*</span></label>
                                 <input type="text" class="form-control p-3" name="user_name_lg" placeholder="Nhập mã số sinh viên" required>
                             </div>
 
                             <div class="form-group w-50 pb-5">
-                                <label for="pwd" class="form-label fw-bold">Mật khẩu *</label>
+                                <label for="pwd" class="form-label fw-bold">Mật khẩu <span class=" text-danger">*</span></label>
                                 <input type="password" class="form-control p-3" name="passlg" placeholder="Nhập mật khẩu" required>
                             </div>
 
@@ -70,13 +70,8 @@
                             <!-- </a> -->
                         </div>
                     </form>
-                    <p>Họ tên: <?php if(isset($_POST["user_name_lg"])) { echo $_POST["user_name_lg"]; } ?></p>
-                    <p>Password: <?php if(isset($_POST["passlg"])) { echo $_POST["passlg"]; } ?></p>
                 </div>
             </div>
-            <!-- <?php
-                require_once(realpath(dirname(__FILE__)."/../..")."/template/sidebar/index.php");
-            ?> -->
         </div>
         <script src="" async defer></script>
     </body>
