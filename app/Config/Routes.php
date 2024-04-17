@@ -21,3 +21,4 @@ $routes->get('scan', [About::class, 'index']);
 $routes->get('valid', [ValidCertificate::class, 'index']);
 $routes->get('certificate/(:num)', [Certificate::class, 'index']);
 $routes->post('/processImage', [ProcessImage::class, 'process']);
+$routes->post('login/check', [Login::class, 'login']);

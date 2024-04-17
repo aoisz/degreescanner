@@ -7,6 +7,7 @@
     );
     $uri = $_SERVER['REQUEST_URI'];
     $uri = trim($uri, "/");
+    $student = session()->get("student_id");
 ?>
 <style>
     .dropdown-toggle::after {
@@ -30,16 +31,25 @@
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" id="infor" class="d-flex text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" onclick=changeDropdownIcon()>
-            <span class="d-flex align-items-center fs-6 text-center hiddenItem">Thanh An</span>
-            <i id="dropdown-icon" class="d-flex align-items-center fa-solid fa-angle-down ms-2 mt-1"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a href="#" class="dropdown-item">Profile</a></li>
-            <li><a href="#" class="dropdown-item">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a href="#" class="dropdown-item">Log Out</a></li>
-        </ul>
+        <?php
+            if (isset($response)) {
+                echo '
+                    <a href="#" id="infor" class="d-flex text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" onclick=changeDropdownIcon()>
+                        <span class="d-flex align-items-center fs-6 text-center hiddenItem">'.$student.'</span>
+                        <i id="dropdown-icon" class="d-flex align-items-center fa-solid fa-angle-down ms-2 mt-1"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li><a href="#" class="dropdown-item">Profile</a></li>
+                        <li><a href="#" class="dropdown-item">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a href="/login" class="dropdown-item">Log Out</a></li>
+                    </ul>
+                ';
+            }
+            else {
+                echo '<a href="/login" class="d-flex text-white text-decoration-none dropdown-toggle"><span class="d-flex align-items-center fs-6 text-center hiddenItem">LOGIN</span></a>';
+            }
+        ?>
     </div>
 </div>
 <script>
