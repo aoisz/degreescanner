@@ -10,8 +10,8 @@
         <title>Degree Scanner</title>
         <meta name="description" content="Degree Scanner">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="<?php echo base_url("bootstrap/bootstrap.min.css")?>" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="<?php echo base_url("bootstrap/bootstrap.bunlde.min.js")?>" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link href="<?php echo base_url("bootstrap/bootstrap.min.css")?>" rel="stylesheet">
+        <script src="<?php echo base_url("bootstrap/bootstrap.bunlde.min.js")?>"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <style>
             html {
@@ -22,36 +22,20 @@
     <body class="h-100">
         <div class="d-flex flex-norwrap bg-body-secondary p-0 h-100 w-100">
             <?php
-                $data = [
-                    [
-                        'id' => 1,
-                        'name' => 'TOEIC',
-                        'studentId' => '3120410019',
-                        'startDate' => '26/03/2024',
-                        'expiredDate' => '31/12/2024',
-                        'grade' => null,
-                        'score' => 990
-                    ],
-                    [
-                        'id' => 2,
-                        'name' => 'B1',
-                        'studentId' => '3120410019',
-                        'startDate' => '26/03/2024',
-                        'expiredDate' => '31/12/2024',
-                        'grade' => null,
-                        'score' => 260
-                    ],
-                    [
-                        'id' => 3,
-                        'name' => 'IELTS',
-                        'certificateId' => '1',
-                        'studentId' => '3120410019',
-                        'startDate' => '26/03/2024',
-                        'expiredDate' => '31/12/2024',
-                        'grade' => null,
-                        'score' => 9
-                    ],
-                ];
+                $data = [];
+                $response = json_decode($response);
+                foreach($response as $item) {
+                    $temp = [
+                        'id' => $item->id,
+                        'name' => $item->certificate->name,
+                        'studentId' => $item->student->lastName . $item->student->firstName,
+                        'startDate'=> new DateTime($item->startDate),
+                        'expiredDate' => explode("T", $item->expiredDate)[0],
+                        'grade'=> null,
+                        'score' => $item->score
+                    ];
+                    array_push($data, $temp);
+                }
                 echo view("components/sidebar/index");
                 echo view_cell("CertificateList::showList", $data);
             ?>

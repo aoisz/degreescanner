@@ -40,7 +40,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                         <li><a href="#" class="dropdown-item">Profile</a></li>
-                        <li><a href="#" class="dropdown-item">Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a href="/login" class="dropdown-item">Log Out</a></li>
                     </ul>

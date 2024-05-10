@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Libraries\APICall;
 use App\Libraries\Session;
+use CodeIgniter\HTTP\RedirectResponse;
 
 const ERROR = "error";
 
@@ -35,6 +36,7 @@ class Login extends BaseController
             else {
                 $result = $session->setUserSession($response->getBody());
                 return view('Pages/Home/index',array('response' => $response->getBody()));
+                // return redirect()->route("/");
             }
         } 
         else {
