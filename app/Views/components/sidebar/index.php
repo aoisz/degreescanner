@@ -8,7 +8,11 @@
     );
     $uri = $_SERVER['REQUEST_URI'];
     $uri = trim($uri, "/");
-
+    $student = array();
+    if(isset($_SESSION["student"])) {
+        $student = $_SESSION["student"];
+    }
+    // echo json_encode($student);
 ?>
 <style>
     .dropdown-toggle::after {
@@ -24,9 +28,9 @@
     <ul class="nav nav-pills flex-column mb-auto">
         <?php
             foreach($sideBarList as $name => $icon) {
-                $temp = explode(" ", $name);
-                $state = $temp[0] === $uri ? "active" : "";
-                echo '<li class="nav-item"><a href="/'.$temp[0].'" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$icon.' pe-3 menuIcon"></i><span class="text-uppercase hiddenItem">'.$name.'</span></a></li>';
+                $tempName = explode(" ", $name);
+                $state = $tempName[0] === $uri ? "active" : "";
+                echo '<li class="nav-item"><a href="/'.($tempName[0] == "scan" ? $tempName[0]."/full" : $tempName[0]).'" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$icon.' pe-3 menuIcon"></i><span class="text-uppercase hiddenItem">'.$name.'</span></a></li>';
             }
         ?>
     </ul>

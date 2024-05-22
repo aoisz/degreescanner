@@ -15,21 +15,65 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <style>
             html {
-                height: -webkit-fill-available;;
+                height: -webkit-fill-available;
             }
         </style>
     </head>
     <body class="h-100">
         <div class="d-flex flex-norwrap p-0 h-100 w-100">
             <?php
+                use App\Libraries\Session;
+
+                $session = new Session();
+
                 echo view("components/sidebar/index");
+                $title = "";
+                if($typeUploader === "full") {
+                    $title = "Upload ảnh chứng chỉ";
+                }
+                else if($typeUploader === "information") {
+                    $title = "Upload ảnh thông tin";
+                }
+                else if($typeUploader === "score") {
+                    $title = "Upload ảnh điểm số";
+                }
             ?>
             
-            <div class="body d-flex align-items-center justify-content-center flex-row w-100">
-                <?php 
-                    echo view_cell("ImageUploader::show", ["imagePath" => isset($imagePath) ? $imagePath : ""]); 
-                    echo view_cell("CertificateInfor::showForm", ["data" => isset($data) ? $data : []]);
-                ?>
+            <div class="d-flex flex-column align-content-center justify-content-center h-100 w-100">
+                <div class="d-flex justify-content-center">
+                    <span class="fw-bold fs-1">
+                        <?php 
+                            echo $title;
+                        ?>
+                    </span>
+                </div>
+                <div class="body d-flex align-items-center justify-content-center flex-row w-100" style="height: 80%;">
+                    <?php 
+                        echo view_cell("ImageUploader::show", ["imagePath" => isset($imagePath) ? $imagePath : ""]);
+                        $data = [
+                            "data" => isset($data) ? $data : [], 
+                            "imagePath" => isset($imagePath) ? $imagePath : ""
+                        ];
+                        if($typeUploader === "full") {
+                            echo view_cell(
+                                "CertificateInfor::showFullImagePicker", 
+                                $data
+                            );
+                        }
+                        else if($typeUploader === "information") {
+                            echo view_cell(
+                                "CertificateInfor::showInfor", 
+                                $data
+                            );
+                        }
+                        else if($typeUploader === "score"){
+                            echo view_cell(
+                                "CertificateInfor::showScore", 
+                                $data
+                            );
+                        }
+                    ?>
+                </div>
             </div>
         </div>
         <script src="" async defer></script>

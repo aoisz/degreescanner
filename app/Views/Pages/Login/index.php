@@ -10,11 +10,7 @@
         <title>Degree Scanner</title>
         <meta name="description" content="Degree Scanner">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="<?php
-
-use CodeIgniter\CLI\Console;
-
- echo base_url("bootstrap/bootstrap.min.css")?>" rel="stylesheet">
+        <link href="<?php echo base_url("bootstrap/bootstrap.min.css")?>" rel="stylesheet">
         <script src="<?php echo base_url("bootstrap/bootstrap.bundle.min.js")?>" async defer></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

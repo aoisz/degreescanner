@@ -3,21 +3,17 @@
 ?>
 
 <form action="scan" method="post" class="formContainer row d-flex g-3 w-25 h-50 ms-5">
-    <div class="col-12">
-        <label for="studentName" class="form-label">Tên sinh viên</label>
-        <input type="text" name="studentName" class="form-control" value="<?php echo $haveData ? $data["studentName"] : "" ?>">
-    </div>
-    <div class="col-12">
-        <label for="birthDay" class="form-label">Ngày sinh</label>
-        <input type="text" name="birthDay" class="form-control" value="<?php echo $haveData ? $data["birthDay"] : "" ?>">
+    <div class="col-6">
+        <label for="certReadingScore" class="form-label">Điểm reading</label>
+        <input type="text" name="certReadingScore" class="form-control" value="<?php echo $haveData ? $data["readingScore"] : "" ?>">
     </div>
     <div class="col-6">
-        <label for="certTestDate" class="form-label">Thời gian test</label>
-        <input type="text" name="certTestDate" class="form-control" value="<?php echo $haveData ? $data["testDate"] : "" ?>">
+        <label for="certListeningScore" class="form-label">Điểm listening</label>
+        <input type="text" name="certListeningScore" class="form-control" value="<?php echo $haveData ? $data["listeningScore"] : "" ?>">
     </div>
-    <div class="col-6">
-        <label for="certExpiredDate" class="form-label">Hết hạn</label>
-        <input type="text" name="certExpiredDate" class="form-control" value="<?php echo $haveData ? $data["validUntil"] : "" ?>">
+    <div class="col-12">
+        <label for="totalScore" class="form-label">Điểm tổng</label>
+        <input type="text" name="totalScore" class="form-control" value="<?php echo $haveData ? $data["totalScore"] : "" ?>">
     </div>
     <div class="col-12 d-flex justify-content-lg-end">
         <button id="submitBtn" type="submit" class="btn btn-primary btn-lg">
@@ -29,7 +25,7 @@
         <h3 class="text-danger">* Lưu ý các bạn cần kiểm tra lại thông tin trước khi submit, có thể chỉnh sửa nếu có sai xót</h3>
     </div>
     <input id="imagePathInput" type="text" name="inforImagePath" class="d-none" value="<?php echo $imagePath ?>">
-    <input type="text" name="typeUploader" class="d-none" value="information">
+    <input type="text" name="typeUploader" class="d-none" value="score">
 </form>
 
 <script>
@@ -41,4 +37,5 @@
     else {
         submitBtn.disabled = false;
     }
+
 </script>

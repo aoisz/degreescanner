@@ -22,6 +22,10 @@
     <body class="h-100">
         <div class="d-flex flex-norwrap p-0 h-100 ">
             <?php
+
+                use App\Libraries\Session;
+                $session = new Session();
+
                 echo view("components/sidebar/index");
             ?>
         </div>
