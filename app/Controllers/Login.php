@@ -7,7 +7,7 @@ use App\Libraries\Session;
 use CodeIgniter\HTTP\RedirectResponse;
 
 const ERROR = "error";
-
+const NOTEXIST ="notexist";
 class Login extends BaseController
 {
     public function index(): string
@@ -16,31 +16,30 @@ class Login extends BaseController
         return view('Pages/Login/index');
     }
 
-    public function login(): string
+    public function login()
     {
         $request = \Config\Services::request();
         $username = $request->getPost("user_name_lg");
         $password = $request->getPost("passlg");
         $api = new APICall();
         $session = new Session();
-        $response = $api->post("/account/login",
+        $_SESSION["status"] = $api->post("/account/login",
             array(
                 'username' => $username,
                 'password' => $password
             )
-        );
-        if ($response->getBody() != null) {
-            if (ERROR == $response->getBody()) {
-                return view('Pages/Login/index');
+        )->getBody();
+        if ($_SESSION['status'] !== NOTEXIST) {
+            if (ERROR === $_SESSION['status']) {
+                return redirect()->route('login');
             }
             else {
-                $result = $session->setUserSession($response->getBody());
-                return view('Pages/Home/index',array('response' => $response->getBody()));
-                // return redirect()->route("/");
+                $_SESSION["student_id"] = $_SESSION["status"];
+                return redirect()->route('home');
             }
         } 
         else {
-            return view('Pages/Login/index',array('response' => null));
+            return redirect()->route('login');
         }
     }
 

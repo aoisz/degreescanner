@@ -21,8 +21,9 @@
     </head>
     <body class="h-100">
         <div class="d-flex flex-norwrap p-0 h-100 ">
-            <?php
-                echo view("components/sidebar/index");
+            <?php 
+                // echo $student->id;
+                echo view("components/sidebar/index", ['student' => $student]);
             ?>
         </div>
         <script src="" async defer></script>

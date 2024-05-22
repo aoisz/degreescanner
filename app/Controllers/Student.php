@@ -19,4 +19,13 @@ class Student extends BaseController
         );
         return view('Pages/Student/index', $data);
     }
+
+    public function getStudentByStudentId(string $studentId)
+    {
+        $api = new APICall();
+        $studentId = session()->get("student_id");
+        $response = $api->get('/student/getByStudentId/'.$studentId);
+        $data = json_decode($response->getBody());
+        return $data;
+    }
 }

@@ -1,13 +1,14 @@
 <?php
+    // echo $student;
     $sideBarList = array(
         "scan" => "fa-regular fa-file-image",
         "history" => "fa-regular fa-square-check",
-        "valid certificate" => "fa-solid fa-file-circle-check",
+        // "valid certificate" => "fa-solid fa-file-circle-check",
         "about us" => "fa-solid fa-circle-info",
     );
     $uri = $_SERVER['REQUEST_URI'];
     $uri = trim($uri, "/");
-    $student = session()->get("student_id");
+
 ?>
 <style>
     .dropdown-toggle::after {
@@ -32,10 +33,10 @@
     <hr>
     <div class="dropdown">
         <?php
-            if (isset($response)) {
+            if (isset($_SESSION["student_id"])) {
                 echo '
                     <a href="#" id="infor" class="d-flex text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" onclick=changeDropdownIcon()>
-                        <span class="d-flex align-items-center fs-6 text-center hiddenItem">'.$student.'</span>
+                        <span class="d-flex align-items-center fs-6 text-center hiddenItem">'.$student->lastName. ' '. $student->firstName. '</span>
                         <i id="dropdown-icon" class="d-flex align-items-center fa-solid fa-angle-down ms-2 mt-1"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
