@@ -8,9 +8,12 @@
         <a href="/certificate/<?= $id ?>/" class="btn btn-secondary mx-1">
             <i class="fa-regular fa-eye"></i>
         </a>
-        <button class="btn btn-danger mx-1" type="button" data-toggle="modal" data-target="#deleteModal<?= $id?>">
+        <a href="/delete/<?= $id ?>/" class="btn btn-danger mx-1">
             <i class="fa-solid fa-trash"></i>
-        </button>
+        </a>
+        <!-- <a class="btn btn-danger mx-1" type="button" data-toggle="modal" data-target="#deleteModal<?= $id?>"> -->
+            <!-- <i class="fa-solid fa-trash"></i> -->
+        <!-- </a> -->
     </div>
 </div>
 

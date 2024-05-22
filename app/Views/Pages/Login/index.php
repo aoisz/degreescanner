@@ -11,15 +11,38 @@
         <meta name="description" content="Degree Scanner">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?php echo base_url("bootstrap/bootstrap.min.css")?>" rel="stylesheet">
-        <script src="<?php echo base_url("bootstrap/bootstrap.bunlde.min.js")?>"></script>
+        <script src="<?php echo base_url("bootstrap/bootstrap.bundle.min.js")?>" async defer></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <style>
             html {
                 height: -webkit-fill-available;;
             }
         </style>
     </head>
-    <body class="h-100">
+    <body class="position-relative h-100 d-flex flex-column justify-content-around align-items-center">
+        <?php
+            // $status = session()->get("status");
+            if (isset($_SESSION['status'])) {
+                if ($_SESSION['status'] === "error") {
+                    echo '
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Đăng nhập không thành công!</strong> Vui lòng kiểm tra lại mật khẩu.
+                        <a href="#" class="close h4 text-decoration-none " data-dismiss="alert" aria-label="close" onclick="hide()" style="padding-left:12px">&times;</a>
+                    </div>
+                    ';
+                }
+                else if ($_SESSION['status'] === "notexist") {
+                    echo '
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Đăng nhập không thành công!</strong> Tài khoản không tồn tại.
+                        <a href="#" class="close h4 text-decoration-none " data-dismiss="alert" aria-label="close" onclick="hide()" style="padding-left:12px">&times;</a>
+                    </div>
+                    ';
+                }
+            }
+            unset($_SESSION['status']);
+        ?>
         <div class="d-flex flex-norwrap p-0 h-100 w-100 justify-content-center align-items-center">
             <div class="d-flex flex-row w-75 h-75 shadow">
                 <div class="d-flex justify-content-center align-content-center leftPanel" style="flex-basis: 60%; background-color: rgba(220, 255, 255, 0.3)">
@@ -72,6 +95,13 @@
                 </div>
             </div>
         </div>
-        <script src="" async defer></script>
     </body>
+    <script>
+        function hide() {
+            const note = document.querySelector('.alert');
+            console.log(note);
+            note.classList.remove("show");
+            note.remove();
+        }
+    </script>
 </html>

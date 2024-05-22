@@ -6,7 +6,7 @@ use App\Libraries\Session;
 
 class Scan extends BaseController
 {
-    public function index($typeUploader): string
+    public function index($typeUploader)
     {
         return view('pages/Scan/index', ['typeUploader' => $typeUploader]);
     }
@@ -26,7 +26,7 @@ class Scan extends BaseController
                 'inforImagePath' => $this->request->getPost("inforImagePath"),
                 'name' => $this->request->getPost("studentName"),
                 'birthDay' => $this->request->getPost("birthDay"),
-                'certTestDate' => $this->request->getPost("certTestDate"),
+                'certTestDate' => $this->request->getPost("certTestDate"), 
                 'certExpiredDate' => $this->request->getPost("certExpiredDate")
             );
             $data->information = $information;
