@@ -8,6 +8,8 @@
     );
     $uri = $_SERVER['REQUEST_URI'];
     $uri = trim($uri, "/");
+    $uri = explode('/', $uri);
+    $uri = $uri[0];
     $student = array();
     if(isset($_SESSION["student"])) {
         $student = $_SESSION["student"];
@@ -22,7 +24,7 @@
 <div id="sidebar" class="d-flex flex-column p-3 flex-shrink-0 text-bg-dark h-100 " style="width: 280px;">
     <div class="d-flex align-text-center text-center" style="min-height: 30px;">
         <i class="fa-solid fa-bars d-flex align-items-center justify-content-center px-3" style="cursor: pointer;" onclick=closeSideBar()></i>
-        <a href="/" class="fs-5 fw-bold text-white text-decoration-none hiddenItem">Degree Scanner</a>
+        <a href="/home" class="fs-5 fw-bold text-white text-decoration-none hiddenItem">Degree Scanner</a>
     </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -44,7 +46,7 @@
                         <i id="dropdown-icon" class="d-flex align-items-center fa-solid fa-angle-down ms-2 mt-1"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a href="#" class="dropdown-item">Profile</a></li>
+                        <li><a href="/profile" class="dropdown-item">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a href="/login" class="dropdown-item">Log Out</a></li>
                     </ul>

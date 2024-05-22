@@ -7,7 +7,7 @@ class Student extends BaseController
 {
     public function index(): string
     {
-        return view('Pages/Student/index');
+        return view('Pages/Profile/index');
     }
 
     public function getAll(): string

@@ -11,7 +11,7 @@
         <meta name="description" content="Degree Scanner">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?php echo base_url("bootstrap/bootstrap.min.css")?>" rel="stylesheet">
-        <script src="<?php echo base_url("bootstrap/bootstrap.bunlde.min.js")?>"></script>
+        <script src="<?php echo base_url("bootstrap/bootstrap.bundle.min.js")?>"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <style>
             html {
@@ -32,7 +32,9 @@
                         'startDate'=> new DateTime($item->startDate),
                         'expiredDate' => explode("T", $item->expiredDate)[0],
                         'grade'=> null,
-                        'score' => $item->score
+                        'totalScore' => $item->totalScore,
+                        'listening' => $item->listeningScore,
+                        'reading' => $item->readingScore
                     ];
                     array_push($data, $temp);
                 }

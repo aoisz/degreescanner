@@ -1,8 +1,15 @@
-<div class="d-flex bg-white shadow-sm w-100 px-2 py-4 my-2" style="height: 108px">
-    <div class="d-flex flex-grow-1 align-items-center infor">
-        <div class="certName fw-bolder fs-3 text-uppercase ps-5 me-5 w-25"><?= $name?></div>
-        <div class="fs-5 w-25"><span class="fw-bold">Điểm: </span><?= $score?></div>
-        <div class="fs-5 w-25"><span class="fw-bold">Hết hạn: </span><?= $expiredDate?></div>
+<div class="d-flex justify-content-between  bg-white shadow-sm w-100 px-2 py-4 my-2" style="height: 108px">
+    <div class="certName fw-bolder fs-3 text-uppercase ps-5 me-5 "><?= $name?></div>
+    <div class="d-flex flex-column align-items-baseline  justify-content-between w-50">
+        <div class="d-flex flex-grow-1 align-items-baseline justify-content-between infor">
+            <div class="fs-5 "><span class="fw-bold">Điểm: </span><?= $totalScore?></div>
+            <div class="fs-5 "><span class="fw-bold">Ngày thi: </span><?= $expiredDate?></div>
+            <div class="fs-5 "><span class="fw-bold">Hết hạn: </span><?= $expiredDate?></div>
+        </div>
+        <div class="d-flex flex-grow-1 align-items-center infor">
+            <div class="fs-5 w-50"><span class="fw-bold">Listening: </span><?= $listening?></div>
+            <div class="fs-5 w-50"><span class="fw-bold">Reading: </span><?= $reading?></div>
+        </div>
     </div>
     <div class="buttons d-flex flex-row justify-content-center align-items-center">
         <a href="/certificate/<?= $id ?>/" class="btn btn-secondary mx-1">
