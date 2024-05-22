@@ -3,12 +3,11 @@ namespace App\Libraries;
 
 class APICall {
     private $client = null;
-    private $session = null;
+
     function __construct() {
         $this->client = \Config\Services::curlrequest([
             'baseURI' => 'http://localhost:8081',
         ]);
-        $this->session = \Config\Services::session();
     }
 
     function get($uri) {
@@ -18,6 +17,18 @@ class APICall {
     function post($uri, $body) {
         return $this->client->request('post' ,$uri, [
             'json' => $body
+        ]);
+    }
+
+    function postWithFile($uri, $data) {
+        return $this->client->request('post', $uri, [
+            'headers' => [
+                'Content-type' => 'multipart/form-data'
+            ],
+            'multipart' => [
+                'file' => new \CURLFile($data["file_path"]),
+                'studentId' => $data["studentId"]
+            ]
         ]);
     }
 }

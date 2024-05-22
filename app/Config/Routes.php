@@ -15,10 +15,12 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', [Home::class, 'index']);
 $routes->get('login', [Login::class, 'index']);
-$routes->get('scan', [Scan::class, 'index']);
+$routes->get('scan/(:alphanum)', [Scan::class, 'index']);
 $routes->get('history', [History::class, 'index']);
-$routes->get('scan', [About::class, 'index']);
+$routes->get('about', [About::class, 'index']);
 $routes->get('valid', [ValidCertificate::class, 'index']);
+$routes->post('valid', [ValidCertificate::class, 'index']);
 $routes->get('certificate/(:num)', [Certificate::class, 'index']);
+$routes->post('scan', [Scan::class, 'post']);
 $routes->post('/processImage', [ProcessImage::class, 'process']);
 $routes->post('login/check', [Login::class, 'login']);
