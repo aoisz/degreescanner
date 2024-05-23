@@ -11,7 +11,7 @@
     </div>
 </div>
 <input id="submitImage" form="processImage" type="submit" class="d-none">
-<input name="typeUploader" form="processImage" type="text" class="d-none" value="<?php echo $typeUploader?>">
+<input name="typeUploader" form="processImage" type="text" class="d-none" value="<?php echo $typeUploader ?>">
 <form action="/processImage" method="post" id="processImage" enctype="multipart/form-data"></form>
 <form action="/addCertificate" method="post" id="addCertificate"></form>
 

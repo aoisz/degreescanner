@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
@@ -11,7 +7,7 @@
         <meta name="description" content="Degree Scanner">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?php echo base_url("bootstrap/bootstrap.min.css")?>" rel="stylesheet">
-        <script src="<?php echo base_url("bootstrap/bootstrap.bunlde.min.js")?>"></script>
+        <script src="<?php echo base_url("bootstrap/bootstrap.bundle.min.js")?>" async defer></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <style>
             html {
@@ -20,12 +16,22 @@
         </style>
     </head>
     <body class="h-100">
-        <div class="d-flex flex-norwrap p-0 h-100 w-100">
+        <div class="d-flex flex-norwrap p-0 h-100 w-100 position-relative">
             <?php
                 use App\Libraries\Session;
 
                 $session = new Session();
-
+                $data = isset($data) ? $data : [];
+                if($session->getData("scan_error")) {
+                    echo '
+                        <div class="position-fixed top-0 w-100 d-flex justify-content-center">
+                            <div class="alert alert-danger alert-dismissible fade show pe-3" role="alert">
+                                <strong>Không nhận dạng được chứng chỉ! </strong> Vui lòng chọn ảnh có độ phân giải cao hơn.
+                                <a href="#" class="close h4 text-decoration-none ms-2" data-dismiss="alert" aria-label="close" onclick="hide()">&times;</a>
+                            </div>
+                        </div>
+                    ';
+                }
                 echo view("components/sidebar/index");
                 $title = "";
                 if($typeUploader === "full") {
@@ -49,11 +55,7 @@
                 </div>
                 <div class="body d-flex align-items-center justify-content-center flex-row w-100" style="height: 80%;">
                     <?php 
-                        echo view_cell("ImageUploader::show", ["imagePath" => isset($imagePath) ? $imagePath : ""]);
-                        $data = [
-                            "data" => isset($data) ? $data : [], 
-                            "imagePath" => isset($imagePath) ? $imagePath : ""
-                        ];
+                        echo view_cell("ImageUploader::show", ["imagePath" => isset($data["imageURL"]) > 0 ? $data["imageURL"] : "", "typeUploader" => $typeUploader]);
                         if($typeUploader === "full") {
                             echo view_cell(
                                 "CertificateInfor::showFullImagePicker", 
@@ -62,13 +64,13 @@
                         }
                         else if($typeUploader === "information") {
                             echo view_cell(
-                                "CertificateInfor::showInfor", 
+                                "CertificateInfor::showInfor",  
                                 $data
                             );
                         }
                         else if($typeUploader === "score"){
                             echo view_cell(
-                                "CertificateInfor::showScore", 
+                                "CertificateInfor::showScore",  
                                 $data
                             );
                         }
@@ -76,6 +78,13 @@
                 </div>
             </div>
         </div>
-        <script src="" async defer></script>
+        <script>
+            function hide() {
+                const note = document.querySelector('.alert');
+                console.log(note);
+                note.classList.remove("show");
+                note.remove();
+            }
+        </script>
     </body>
 </html>

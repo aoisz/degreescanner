@@ -8,14 +8,14 @@ class Session {
         $this->session = \Config\Services::session();
     }
 
-	function setData($key, $data) {
+	function setData(string $key, $data) {
 		$this->session->set([$key => $data]);
 		return true;
 	}
 
 	function getData($key) {
 		if($this->session->has($key)) {
-			return $this->session->get($key);
+			return json_decode(json_encode($this->session->get($key)), true);
 		}
 		else {
 			return null;
@@ -29,6 +29,13 @@ class Session {
 			return true;
 		}
 		return false;
+	}
+
+	function removeListData(array $listKey)
+	{
+		foreach($listKey as $key) {
+			$this->removeData($key);
+		}
 	}
 
 	function hasData($key): bool

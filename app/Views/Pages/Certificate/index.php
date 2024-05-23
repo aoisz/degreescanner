@@ -20,7 +20,7 @@
         </style>
     </head>
     <body class="h-100 position-relative">
-        <div class="d-flex flex-norwrap p-0 h-100 ">
+        <div class="d-flex flex-norwrap p-0 h-100">
             <?php
                 echo view("components/sidebar/index");
                 echo view_cell("CertificateInfor::showForm", $data);

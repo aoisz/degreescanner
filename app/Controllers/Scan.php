@@ -2,40 +2,81 @@
 
 namespace App\Controllers;
 
+use App\Libraries\APICall;
 use App\Libraries\Session;
 
 class Scan extends BaseController
 {
-    public function index($typeUploader)
+    public function index(array $params = [])
     {
-        return view('pages/Scan/index', ['typeUploader' => $typeUploader]);
+        return view(
+            'Pages/Scan/index', 
+            [
+                "typeUploader" => isset($params["typeUploader"]) ? $params["typeUploader"] : "full",
+                "data" => isset($params["data"]) ? $params["data"] : [],
+            ]
+        );
     }
 
     public function post()
     {
+        $data = [];
+        $api = new APICall();
         $session = new Session();
-        $data = $session->getData("data") ? json_decode($session->getData("data")) : ["fullImagePath" => "", 'information' => [], 'score' => []];
         $nextTypeUploader = "";
         $typeUploader = $this->request->getPost("typeUploader");
         if($typeUploader === "full") {
-            $data["fullImagePath"] = $this->request->getPost("imagePath");
+            $data = [
+                "imageURL" => $this->request->getPost("imagePath")
+            ];
             $nextTypeUploader = "information";
         }
         else if($typeUploader === "information") {
-            $information = array(
-                'inforImagePath' => $this->request->getPost("inforImagePath"),
+            $information = [
+                'imageURL' => $this->request->getPost("inforImagePath"),
                 'name' => $this->request->getPost("studentName"),
                 'birthDay' => $this->request->getPost("birthDay"),
                 'certTestDate' => $this->request->getPost("certTestDate"), 
                 'certExpiredDate' => $this->request->getPost("certExpiredDate")
-            );
-            $data->information = $information;
+            ];
+            $data = $information;
             $nextTypeUploader = "score";
         }
         else if($typeUploader === "score") {
-            
+            $score = [
+                'imageURL' => $this->request->getPost("scoreImagePath"),
+                'listeningScore' => $this->request->getPost("listeningScore"),
+                'readingScore' => $this->request->getPost("readingScore"),
+                'totalScore' => $this->request->getPost("totalScore")
+            ];
+            $data = $score;
         }
-        $session->setData("data", json_encode($data));
-        return view('Pages/Scan/index', ['typeUploader' => $nextTypeUploader]);
+        if($session->hasData("data")) {
+            $temp = $session->getData("data");
+            if(isset($temp[$typeUploader])) {
+                $temp[$typeUploader] = $data;
+            }
+            else {
+                $temp += [$typeUploader => $data];                
+            }
+            $session->setData("data", $temp);
+        }
+        else {
+            $session->setData("data", [$typeUploader => $data]);
+        }
+        if($typeUploader === "score") {
+            $postData = $session->getData("data");
+            $postData += ["studentId" => "3120410019"];
+            echo json_encode($postData);
+            $isCreated = $api->post("/certificate/create", $postData);
+            echo $isCreated->getBody();
+            // echo json_encode($session->getData("data"));
+        }
+        else {
+            echo json_encode($session->getData("data"));
+            return $this->index([
+                "typeUploader" => $nextTypeUploader,
+            ]);
+        }
     }
 }

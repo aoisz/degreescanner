@@ -13,4 +13,9 @@ class CertificateRow
     {
         return view("components/certificate_list/certificaterow", $item);
     }
+
+    public function showEmpty(): string
+    {
+        return view("components/certificate_list/emptylist");
+    }
 }

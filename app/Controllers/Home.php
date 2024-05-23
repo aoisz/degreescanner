@@ -4,8 +4,6 @@ namespace App\Controllers;
 use App\Libraries\APICall;
 use App\Libraries\Session;
 
-// use Student;
-
 class Home extends BaseController
 {
     public function index()
@@ -15,7 +13,8 @@ class Home extends BaseController
         $session = new Session();
         if (isset($_SESSION["student_id"])) {
             $data = $student->getStudentByStudentId($_SESSION["student_id"]);
-            return view('Pages/Home/index', ['student' => $data]);
+            $session->setData("student", $data);
+            return view('Pages/Scan/index', ["typeUploader" => "full"]);
         }
         else return view('Pages/Login/index');
     }

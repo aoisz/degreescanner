@@ -4,7 +4,7 @@
 
 <form action="scan" method="post" class="formContainer row d-flex g-3 w-25 h-50 ms-5">
     <div class="col-12">
-        <h3 class="text-danger">* Lưu ý các bạn cần kiểm tra lại thông tin trước khi submit, có thể chỉnh sửa nếu có sai xót</h3>
+        <h3 class="text-danger">* Lưu ý các bạn cần kiểm tra lại thông tin trước khi upload</h3>
     </div>
     <div class="col-12 d-flex justify-content-center" style="height: 15%">
         <button id="submitBtn" type="submit" class="btn btn-primary">

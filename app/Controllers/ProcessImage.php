@@ -12,41 +12,54 @@ class ProcessImage extends BaseController {
         $api = new APICall();
         $session = new Session();
         $typeUploader = $this->request->getPost("typeUploader");
-        $imageName = $typeUploader.".png";
+        $imageName = $typeUploader.".png"; 
         $data = [];
-
+        // Copy to public folder, CI4 can only access image from public folder
         $file = $this->request->getFile("imageFile");
-        $filePath = WRITEPATH.'uploads/data/'.$imageName;
-        $file->move(WRITEPATH.'uploads/data/',$imageName, true);
-        $isCopied = copy($filePath, ROOTPATH.'public/uploads/'.$imageName);
-        if($isCopied) {
-            $filePath = ROOTPATH.'public/uploads/'.$imageName;
-            echo $session->getData("student_id");
-        }
-
-        if($typeUploader === "information") {
-            $data = array(
+        $filePath = ROOTPATH.'public\uploads\\';
+        $file->move($filePath,$imageName,true);
+        $filePath .= $imageName;
+        if($typeUploader === "full") {
+            $session->removeData("data");
+            $postData = array(
                 'file_path' => $filePath,
                 'studentId' => "3120410019"
             );
-            $result = $api->postWithFile("/ocr/upload/information", $data);
+            $result = $api->postWithFile("/ocr/upload/full", $postData);
+            $data = json_decode($result->getBody());
+        }
+        else if($typeUploader === "information") {
+            $postData = array(
+                'file_path' => $filePath,
+                'studentId' => "3120410019"
+            );
+            $result = $api->postWithFile("/ocr/upload/information", $postData);
             $data = json_decode($result->getBody(), true);
         }
         else if($typeUploader === "score") {
-            $data = array(
+            $postData = array(
                 'file_path' => $filePath,
                 'studentId' => "3120410019"
             );
-            $result = $api->postWithFile("/ocr/upload/score", $data);
+            $result = $api->postWithFile("/ocr/upload/score", $postData);
             $data = json_decode($result->getBody(), true);
         }
-        else if($typeUploader === "full") {
-            
+        if($typeUploader !== "full") {    
+            foreach ($data as $item) {
+                if($item === "") {
+                    $session->setData("scan_error", true);
+                    break;
+                }
+            }
         }
-        // return view("Pages/Scan/index",[
-        //     'typeUploader' => $typeUploader,
-        //     'imagePath' => $filePath,
-        //     'data' => $data
-        // ]);
+        $data = json_decode(json_encode($data), true); // stdClass -> array
+        return view(
+            "Pages/Scan/index", 
+            [
+                "typeUploader" => $typeUploader, 
+                "data" => $data,
+                "imagePath" => $filePath
+            ]
+        );
     }
 }

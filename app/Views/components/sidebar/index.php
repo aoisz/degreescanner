@@ -8,6 +8,13 @@
     );
     $uri = $_SERVER['REQUEST_URI'];
     $uri = trim($uri, "/");
+    $uri = explode("/", $uri);
+    $uri = $uri[0];
+    $student = array();
+    if(isset($_SESSION["student"])) {
+        $student = $_SESSION["student"];
+    }
+    // echo json_encode($student);
 ?>
 <style>
     .dropdown-toggle::after {
@@ -17,7 +24,7 @@
 <div id="sidebar" class="d-flex flex-column p-3 flex-shrink-0 text-bg-dark h-100 " style="width: 280px;">
     <div class="d-flex align-text-center text-center" style="min-height: 30px;">
         <i class="fa-solid fa-bars d-flex align-items-center justify-content-center px-3" style="cursor: pointer;" onclick=closeSideBar()></i>
-        <a href="/" class="fs-5 fw-bold text-white text-decoration-none hiddenItem">Degree Scanner</a>
+        <a href="/home" class="fs-5 fw-bold text-white text-decoration-none hiddenItem">Degree Scanner</a>
     </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -25,7 +32,7 @@
             foreach($sideBarList as $name => $icon) {
                 $tempName = explode(" ", $name);
                 $state = $tempName[0] === $uri ? "active" : "";
-                echo '<li class="nav-item"><a href="/'.($tempName[0] == "scan" ? $tempName[0]."/full" : $tempName[0]).'" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$icon.' pe-3 menuIcon"></i><span class="text-uppercase hiddenItem">'.$name.'</span></a></li>';
+                echo '<li class="nav-item"><a href="/'.$tempName[0].'" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$icon.' pe-3 menuIcon"></i><span class="text-uppercase hiddenItem">'.$name.'</span></a></li>';
             }
         ?>
     </ul>

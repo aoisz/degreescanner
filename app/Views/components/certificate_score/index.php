@@ -5,11 +5,11 @@
 <form action="scan" method="post" class="formContainer row d-flex g-3 w-25 h-50 ms-5">
     <div class="col-6">
         <label for="certReadingScore" class="form-label">Điểm reading</label>
-        <input type="text" name="certReadingScore" class="form-control" value="<?php echo $haveData ? $data["readingScore"] : "" ?>">
+        <input type="text" name="readingScore" class="form-control" value="<?php echo $haveData ? $data["readingScore"] : "" ?>">
     </div>
     <div class="col-6">
         <label for="certListeningScore" class="form-label">Điểm listening</label>
-        <input type="text" name="certListeningScore" class="form-control" value="<?php echo $haveData ? $data["listeningScore"] : "" ?>">
+        <input type="text" name="listeningScore" class="form-control" value="<?php echo $haveData ? $data["listeningScore"] : "" ?>">
     </div>
     <div class="col-12">
         <label for="totalScore" class="form-label">Điểm tổng</label>
@@ -17,14 +17,14 @@
     </div>
     <div class="col-12 d-flex justify-content-lg-end">
         <button id="submitBtn" type="submit" class="btn btn-primary btn-lg">
-            Next
+            Upload
             <i class="fa-solid fa-arrow-right"></i>
         </button>
     </div>
     <div class="col-12">
-        <h3 class="text-danger">* Lưu ý các bạn cần kiểm tra lại thông tin trước khi submit, có thể chỉnh sửa nếu có sai xót</h3>
+        <h3 class="text-danger">* Lưu ý các bạn cần kiểm tra lại thông tin trước khi tiếp tục</h3>
     </div>
-    <input id="imagePathInput" type="text" name="inforImagePath" class="d-none" value="<?php echo $imagePath ?>">
+    <input id="imagePathInput" type="text" name="scoreImagePath" class="d-none" value="<?php echo $imagePath ?>">
     <input type="text" name="typeUploader" class="d-none" value="score">
 </form>
 

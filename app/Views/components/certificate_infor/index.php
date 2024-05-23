@@ -26,7 +26,7 @@
         </button>
     </div>
     <div class="col-12">
-        <h3 class="text-danger">* Lưu ý các bạn cần kiểm tra lại thông tin trước khi submit, có thể chỉnh sửa nếu có sai xót</h3>
+        <h3 class="text-danger">* Lưu ý các bạn cần kiểm tra lại thông tin trước khi tiếp tục</h3>
     </div>
     <input id="imagePathInput" type="text" name="inforImagePath" class="d-none" value="<?php echo $imagePath ?>">
     <input type="text" name="typeUploader" class="d-none" value="information">

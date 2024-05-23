@@ -20,6 +20,12 @@ class APICall {
         ]);
     }
 
+    function postWithBody(string $uri, $body) {
+        return $this->client->request('post', $uri, [
+            'body' => json_encode($body)
+        ]);
+    }
+
     function postWithFile($uri, $data) {
         return $this->client->request('post', $uri, [
             'headers' => [
