@@ -67,13 +67,10 @@ class Scan extends BaseController
         if($typeUploader === "score") {
             $postData = $session->getData("data");
             $postData += ["studentId" => "3120410019"];
-            echo json_encode($postData);
-            $isCreated = $api->post("/certificate/create", $postData);
-            echo $isCreated->getBody();
+            $isCreated = $api->post("/student_certificate/create", $postData);
             // echo json_encode($session->getData("data"));
         }
         else {
-            echo json_encode($session->getData("data"));
             return $this->index([
                 "typeUploader" => $nextTypeUploader,
             ]);

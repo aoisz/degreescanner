@@ -22,6 +22,8 @@
     <body class="h-100 w-100">
         <div class="d-flex flex-norwrap p-0 h-100 w-100">
             <?php
+                use App\Libraries\Session;
+                $session = new Session();
                 echo view("components/sidebar/index");
             ?>
             <!-- container -->
@@ -122,8 +124,7 @@
                         </div>
                     </div>
                 </div>
-          </div>
+            </div>
         </div>
-        <script src="" async defer></script>
     </body>
 </html>

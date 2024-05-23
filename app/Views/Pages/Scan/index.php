@@ -55,7 +55,7 @@
                 </div>
                 <div class="body d-flex align-items-center justify-content-center flex-row w-100" style="height: 80%;">
                     <?php 
-                        echo view_cell("ImageUploader::show", ["imagePath" => isset($data["imageURL"]) > 0 ? $data["imageURL"] : "", "typeUploader" => $typeUploader]);
+                        echo view_cell("ImageUploader::show", ["imagePath" => isset($data["image"]) > 0 ? $data["image"] : "", "typeUploader" => $typeUploader]);
                         if($typeUploader === "full") {
                             echo view_cell(
                                 "CertificateInfor::showFullImagePicker", 

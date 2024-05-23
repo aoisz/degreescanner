@@ -21,7 +21,7 @@
     </div>
     <div class="col-12 d-flex justify-content-lg-end">
         <button id="submitBtn" type="submit" class="btn btn-primary btn-lg">
-            Next
+            Tiếp tục
             <i class="fa-solid fa-arrow-right"></i>
         </button>
     </div>

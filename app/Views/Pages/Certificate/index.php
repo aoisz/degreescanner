@@ -23,7 +23,8 @@
         <div class="d-flex flex-norwrap p-0 h-100">
             <?php
                 echo view("components/sidebar/index");
-                echo view_cell("CertificateInfor::showForm", $data);
+                $data = json_decode(json_encode($data), true);
+                echo view_cell("CertificateInfor::showDetails", ['data' => $data]);
             ?>
         </div>
         <script src="" async defer></script>

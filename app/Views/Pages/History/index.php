@@ -32,7 +32,9 @@
                         'startDate'=> new DateTime($item->startDate),
                         'expiredDate' => explode("T", $item->expiredDate)[0],
                         'grade'=> null,
-                        'score' => $item->score
+                        'totalScore' => $item->totalScore,
+                        'listening' => $item->listeningScore,
+                        'reading' => $item->readingScore
                     ];
                     array_push($data, $temp);
                 }

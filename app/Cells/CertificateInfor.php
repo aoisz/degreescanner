@@ -17,4 +17,8 @@ class CertificateInfor {
     {
         return view('components/certificate_score/index', ['data' => $data]);
     }
+    public function showDetails(array $data): string
+    {
+        return view('components/certificate_detail/index', ['data' => $data]);
+    }
 }

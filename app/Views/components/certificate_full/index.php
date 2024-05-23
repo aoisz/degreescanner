@@ -8,7 +8,7 @@
     </div>
     <div class="col-12 d-flex justify-content-center" style="height: 15%">
         <button id="submitBtn" type="submit" class="btn btn-primary">
-            Next
+            Tiếp tục
             <i class="fa-solid fa-arrow-right"></i>
         </button>
     </div>

@@ -1,18 +1,36 @@
 <?php
     // echo $student;
     $sideBarList = array(
-        "scan" => "fa-regular fa-file-image",
-        "history" => "fa-regular fa-square-check",
-        // "valid certificate" => "fa-solid fa-file-circle-check",
-        "about us" => "fa-solid fa-circle-info",
+        "about" => [
+            "icon" => "fa-solid fa-circle-info",
+            "name" => "Giới thiệu"
+        ],
     );
     $uri = $_SERVER['REQUEST_URI'];
     $uri = trim($uri, "/");
-    $uri = explode("/", $uri);
+    $uri = explode('/', $uri);
     $uri = $uri[0];
     $student = array();
     if(isset($_SESSION["student"])) {
         $student = $_SESSION["student"];
+        $sideBarList = [
+            "scan" => [
+                "icon" => "fa-regular fa-file-image",
+                "name" => "Cập nhật chứng chỉ"
+            ],
+            "history" => [
+                "icon" => "fa-regular fa-square-check",
+                "name" => "Lịch sử cập nhật"
+            ]
+        ] + $sideBarList;
+    }
+    else if(isset($_SESSION["admin"])) {
+        $sideBarList = [
+            "admin" => [
+                "icon" => "fa-solid fa-user-tie",
+                "name" => "Quản trị viên"
+            ]
+        ] + $sideBarList;
     }
     // echo json_encode($student);
 ?>
@@ -24,15 +42,14 @@
 <div id="sidebar" class="d-flex flex-column p-3 flex-shrink-0 text-bg-dark h-100 " style="width: 280px;">
     <div class="d-flex align-text-center text-center" style="min-height: 30px;">
         <i class="fa-solid fa-bars d-flex align-items-center justify-content-center px-3" style="cursor: pointer;" onclick=closeSideBar()></i>
-        <a href="/home" class="fs-5 fw-bold text-white text-decoration-none hiddenItem">Degree Scanner</a>
+        <a href="<?php isset($_SESSION["admin"]) ? "/admin" : "/scan" ?>" class="fs-5 fw-bold text-white text-decoration-none hiddenItem">Degree Scanner</a>
     </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <?php
-            foreach($sideBarList as $name => $icon) {
-                $tempName = explode(" ", $name);
-                $state = $tempName[0] === $uri ? "active" : "";
-                echo '<li class="nav-item"><a href="/'.$tempName[0].'" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$icon.' pe-3 menuIcon"></i><span class="text-uppercase hiddenItem">'.$name.'</span></a></li>';
+            foreach($sideBarList as $key => $body) {
+                $state = $key === $uri ? "active" : "";
+                echo '<li class="nav-item"><a href="/'.$key.'" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$body["icon"].' pe-3 menuIcon"></i><span class="text-uppercase hiddenItem">'.$body["name"].'</span></a></li>';
             }
         ?>
     </ul>
@@ -46,8 +63,19 @@
                         <i id="dropdown-icon" class="d-flex align-items-center fa-solid fa-angle-down ms-2 mt-1"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a href="#" class="dropdown-item">Profile</a></li>
+                        <li><a href="/profile" class="dropdown-item">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
+                        <li><a href="/login" class="dropdown-item">Log Out</a></li>
+                    </ul>
+                ';
+            }
+            else if(isset($_SESSION["admin"])) {
+                echo '
+                    <a href="#" id="infor" class="d-flex text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" onclick=changeDropdownIcon()>
+                        <span class="d-flex align-items-center fs-6 text-center hiddenItem">Admin</span>
+                        <i id="dropdown-icon" class="d-flex align-items-center fa-solid fa-angle-down ms-2 mt-1"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                         <li><a href="/login" class="dropdown-item">Log Out</a></li>
                     </ul>
                 ';
