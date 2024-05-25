@@ -22,11 +22,21 @@
 
                 $session = new Session();
                 $data = isset($data) ? $data : [];
-                if($session->getData("scan_error")) {
+                if(isset($scanError) && $scanError !== "") {
                     echo '
                         <div class="position-fixed top-0 w-100 d-flex justify-content-center">
                             <div class="alert alert-danger alert-dismissible fade show pe-3" role="alert">
                                 <strong>Không nhận dạng được chứng chỉ! </strong> Vui lòng chọn ảnh có độ phân giải cao hơn.
+                                <a href="#" class="close h4 text-decoration-none ms-2" data-dismiss="alert" aria-label="close" onclick="hide()">&times;</a>
+                            </div>
+                        </div>
+                    ';
+                }
+                if(isset($updateSuccess) && $updateSuccess !== "") {
+                    echo '
+                        <div class="position-fixed top-0 w-100 d-flex justify-content-center">
+                            <div class="alert alert-primary alert-dismissible fade show pe-3" role="alert">
+                                <strong>Cập nhật chứng chỉ thành công</strong>
                                 <a href="#" class="close h4 text-decoration-none ms-2" data-dismiss="alert" aria-label="close" onclick="hide()">&times;</a>
                             </div>
                         </div>

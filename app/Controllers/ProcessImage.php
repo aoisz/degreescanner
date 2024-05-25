@@ -44,10 +44,12 @@ class ProcessImage extends BaseController {
             $result = $api->postWithFile("/ocr/upload/score", $postData);
             $data = json_decode($result->getBody(), true);
         }
+        $scanError = false;
         if($typeUploader !== "full") {    
             foreach ($data as $item) {
                 if($item === "") {
-                    $session->setData("scan_error", true);
+                    // $session->setData("scan_error", true);
+                    $scanError = true;
                     break;
                 }
             }
@@ -58,8 +60,10 @@ class ProcessImage extends BaseController {
             [
                 "typeUploader" => $typeUploader, 
                 "data" => $data,
-                "imagePath" => $filePath
+                "imagePath" => $filePath,
+                "scanError" => $scanError
             ]
         );
     }
 }
+

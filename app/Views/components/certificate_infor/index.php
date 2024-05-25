@@ -5,19 +5,19 @@
 <form action="scan" method="post" class="formContainer row d-flex g-3 w-25 h-50 ms-5">
     <div class="col-12">
         <label for="studentName" class="form-label">Tên sinh viên</label>
-        <input type="text" name="studentName" class="form-control" value="<?php echo $haveData ? $data["studentName"] : "" ?>">
+        <input type="text" name="studentName" class="form-control" readonly value="<?php echo $haveData ? $data["studentName"] : "" ?>">
     </div>
     <div class="col-12">
         <label for="birthDay" class="form-label">Ngày sinh</label>
-        <input type="text" name="birthDay" class="form-control" value="<?php echo $haveData ? $data["birthDay"] : "" ?>">
+        <input type="text" name="birthDay" class="form-control" readonly value="<?php echo $haveData ? $data["birthDay"] : "" ?>">
     </div>
     <div class="col-6">
         <label for="certTestDate" class="form-label">Thời gian test</label>
-        <input type="text" name="certTestDate" class="form-control" value="<?php echo $haveData ? $data["testDate"] : "" ?>">
+        <input type="text" name="certTestDate" class="form-control" readonly value="<?php echo $haveData ? $data["testDate"] : "" ?>">
     </div>
     <div class="col-6">
         <label for="certExpiredDate" class="form-label">Hết hạn</label>
-        <input type="text" name="certExpiredDate" class="form-control" value="<?php echo $haveData ? $data["validUntil"] : "" ?>">
+        <input type="text" name="certExpiredDate" class="form-control" readonly value="<?php echo $haveData ? $data["validUntil"] : "" ?>">
     </div>
     <div class="col-12 d-flex justify-content-lg-end">
         <button id="submitBtn" type="submit" class="btn btn-primary btn-lg">
@@ -34,11 +34,12 @@
 
 <script>
     const submitBtn = document.getElementById("submitBtn");
-    const imagePathInput = document.getElementById("imagePathInput");
-    if(imagePathInput.value === "") {
-        submitBtn.disabled = true;
-    }
-    else {
-        submitBtn.disabled = false;
-    }
+    submitBtn.disabled = true;
+    // const imagePathInput = document.getElementById("imagePathInput");
+    // if(imagePathInput.value === "") {
+    //     submitBtn.disabled = true;
+    // }
+    // else {
+    //     submitBtn.disabled = false;
+    // }
 </script>

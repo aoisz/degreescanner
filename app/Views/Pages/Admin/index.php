@@ -29,15 +29,27 @@
                         <span class="fs-2 fw-bold py-4">Danh sách chứng chỉ chờ duyệt</span>
                     </div>
                     <ul class="w-100 h-100 list-unstyled overflow-y-scroll">
-                        <li class="list_item bg-body-tertiary mx-4 my-4 shadow rounded-2 position-relative">
-                            <div class="d-flex justify-content-around align-items-center w-75 h-100">
-                                <span class="w-50 fs-4 fw-medium"><strong>Sinh viên:</strong> Mai Thanh An</span>
-                                <span class="w-25 fs-4"><strong>Chứng chỉ:</strong> TOEIC</span>
-                            </div>
-                            <div class="position-absolute end-0 top-0 bottom-0 d-flex align-items-center">
-                                <div class="btn btn-light border-1 border-secondary-subtle px-4 py-2 me-4"><a href="admin/pending/1" class="text-decoration-none text-black">Xem</a></div>
-                            </div>
-                        </li>
+                        <?php
+                            if(!isset($delete)) {
+                                echo '<li class="list_item bg-body-tertiary mx-4 my-4 shadow rounded-2 position-relative">
+                                    <div class="d-flex justify-content-around align-items-center w-75 h-100">
+                                        <span class="w-50 fs-4 fw-medium"><strong>Sinh viên:</strong> Mai Thanh An</span>
+                                        <span class="w-25 fs-4"><strong>Chứng chỉ:</strong> TOEIC</span>
+                                    </div>
+                                    <div class="position-absolute end-0 top-0 bottom-0 d-flex align-items-center">
+                                        <div class="btn btn-light border-1 border-secondary-subtle px-4 py-2 me-4"><a href="admin/pending/1" class="text-decoration-none text-black">Xem</a></div>
+                                    </div>
+                                </li>';
+                            } 
+                            else {
+                                echo '<div class="position-fixed top-0 w-100 d-flex justify-content-center">
+                                <div class="alert alert-primary alert-dismissible fade show pe-3" role="alert">
+                                    <strong>Xác thực thành công! </strong>
+                                    <a href="#" class="close h4 text-decoration-none ms-2" data-dismiss="alert" aria-label="close" onclick="hide()">&times;</a>
+                                </div>
+                            </div>';
+                            }
+                        ?>
                         
                         <li class="list_item bg-body-tertiary mx-4 my-4 shadow rounded-2 position-relative">
                             <div class="d-flex justify-content-around align-items-center w-75 h-100">
@@ -51,7 +63,7 @@
                         
                         <li class="list_item bg-body-tertiary mx-4 my-4 shadow rounded-2 position-relative">
                             <div class="d-flex justify-content-around align-items-center w-75 h-100">
-                                <span class="w-50 fs-4 fw-medium"><strong>Sinh viên:</strong> Mai Thanh An</span>
+                                <span class="w-50 fs-4 fw-medium"><strong>Sinh viên:</strong> Lê Thanh Hải</span>
                                 <span class="w-25 fs-4"><strong>Chứng chỉ:</strong> TOEIC</span>
                             </div>
                             <div class="position-absolute end-0 top-0 bottom-0 d-flex align-items-center">

@@ -9,7 +9,6 @@
     $uri = $_SERVER['REQUEST_URI'];
     $uri = trim($uri, "/");
     $uri = explode('/', $uri);
-    $uri = $uri[0];
     $student = array();
     if(isset($_SESSION["student"])) {
         $student = $_SESSION["student"];
@@ -48,7 +47,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
         <?php
             foreach($sideBarList as $key => $body) {
-                $state = $key === $uri ? "active" : "";
+                $state = in_array($key, $uri) ? "active" : "";
                 echo '<li class="nav-item"><a href="/'.$key.'" class="nav-link text-white side-bar '.$state.'" style="cursor: pointer;" aria-current="page"><i class="'.$body["icon"].' pe-3 menuIcon"></i><span class="text-uppercase hiddenItem">'.$body["name"].'</span></a></li>';
             }
         ?>

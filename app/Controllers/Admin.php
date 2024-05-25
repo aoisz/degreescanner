@@ -18,7 +18,11 @@ class Admin extends BaseController
     public function showPending(string $id) {
         $session = new Session();
         $api = new APICall();
-        $response = $api->get('/student_certificate/getById/2');
+        $response = $api->get('/student_certificate/getById/3');
         return view("Pages/Admin/pending", ['data' => json_decode($response->getBody(), true)]);
+    }
+
+    public function delete() {
+        return view("pages/Admin/index", ["delete" => true]);
     }
 }

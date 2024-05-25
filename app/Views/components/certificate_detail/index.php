@@ -45,7 +45,6 @@
                         <label class="labels p-2 ">Hết hạn</label>
                         <input type="text" class="form-control" disabled="disabled" value="<?php echo $data["expiredDate"]?>">
                     </div>
-                
                 </div>
             </div>
         </div>

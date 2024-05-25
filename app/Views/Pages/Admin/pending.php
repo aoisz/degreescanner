@@ -54,34 +54,35 @@
                                 <div class="row mt-3">
                                     <div class="col-md-12 p-2">
                                         <label class="labels p-2 ">Tên chứng chỉ</label>
-                                        <input type="text" class="form-control" disabled="disabled" value="<?php echo $data["certificate"]["name"]?>">
+                                        <input type="text" form="form" class="form-control" disabled="disabled" value="<?php echo $data["certificate"]["name"]?>">
                                     </div>
                                     <div class="col-md-6 p-2">
                                         <label class="labels p-2 ">Điểm reading</label>
-                                        <input type="text" class="form-control" disabled="disabled" value="<?php echo $data["readingScore"]?>">
+                                        <input type="text" form="form" class="form-control" disabled="disabled" value="<?php echo $data["readingScore"]?>">
                                     </div>
                                     <div class="col-md-6 p-2">
                                         <label class="labels p-2 ">Điểm listening</label>
-                                        <input type="text" class="form-control" disabled="disabled" value="<?php echo $data["listeningScore"]?>">
+                                        <input type="text" form="form" class="form-control" disabled="disabled" value="<?php echo $data["listeningScore"]?>">
                                     </div>
                                     <div class="col-md-12 p-2">
                                         <label class="labels p-2 ">Điểm tổng cộng</label>
-                                        <input type="text" class="form-control" disabled="disabled" value="<?php echo $data["totalScore"]?>">
+                                        <input type="text" form="form" class="form-control" disabled="disabled" value="<?php echo $data["totalScore"]?>">
                                     </div>
                                     <div class="col-md-6 p-2">
                                         <label class="labels p-2 ">Ngày thi</label>
-                                        <input type="text" class="form-control" disabled="disabled" value="<?php echo $data["startDate"]?>">
+                                        <input type="text" form="form" class="form-control" disabled="disabled" value="<?php echo $data["startDate"]?>">
                                     </div>
                                     <div class="col-md-6 p-2">
                                         <label class="labels p-2 ">Hết hạn</label>
-                                        <input type="text" class="form-control" disabled="disabled" value="<?php echo $data["expiredDate"]?>">
+                                        <input type="text" form="form" class="form-control" disabled="disabled" value="<?php echo $data["expiredDate"]?>">
                                     </div>
                                     <div class="col-md-12 d-flex justify-content-end align-items-center py-4">
-                                        <button class="btn btn-danger me-4 fw-medium">Không hợp lệ</button>
-                                        <button class="btn btn-primary fw-medium">Hợp lệ</button>
+                                        <button type="submit" form="form" class="btn btn-danger me-4 fw-medium">Không hợp lệ</button>
+                                        <button type="submit" form="form" class="btn btn-primary fw-medium">Hợp lệ</button>
                                     </div>
                                 </div>
                             </div>
+                            <form id="form" action="/admin/delete" action="post"></form>
                         </div>
                     </div>
                 </div>
