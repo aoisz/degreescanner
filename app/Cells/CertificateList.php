@@ -18,4 +18,16 @@ class CertificateRow
     {
         return view("components/certificate_list/emptylist");
     }
+    public function showAllList($data): string
+    {
+        return view("components/certificate_list/indexadmin", ['data' => $data]);
+    }
+    public function showRowAdmin($item): string
+    {
+        return view("components/certificate_list/certificaterowadmin", $item);
+    }
+    public function showEmptyAdmin(): string
+    {
+        return view("components/certificate_list/emptylistadmin");
+    }
 }

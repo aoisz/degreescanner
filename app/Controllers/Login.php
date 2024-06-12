@@ -7,6 +7,7 @@ use App\Libraries\Session;
 
 const ERROR = "error";
 const NOTEXIST ="notexist";
+const ADMIN = "admin";
 class Login extends BaseController
 {
     public function index(): string
@@ -29,16 +30,16 @@ class Login extends BaseController
             )
         )->getBody();
         if ($_SESSION['status'] !== NOTEXIST) {
-            if (ERROR === $_SESSION['status']) {
+            if ($_SESSION['status'] === ERROR) {
                 return redirect()->route('login');
             }
             else {
-                if(is_numeric($_SESSION["status"])) {
-                    $_SESSION["student_id"] = $_SESSION["status"];
+                if($_SESSION['status'] === ADMIN) {
+                    $_SESSION["admin"] = true;
                     return redirect()->route('home');
                 }
                 else {
-                    $_SESSION["admin"] = true;
+                    $_SESSION["student_id"] = $_SESSION["status"];
                     return redirect()->route('home');
                 }
             }

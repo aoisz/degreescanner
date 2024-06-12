@@ -37,4 +37,5 @@ $routes->post('/processImage', [ProcessImage::class, 'process']);
 $routes->post('login/check', [Login::class, 'login']);
 $routes->post('about', [About::class, 'index']);
 $routes->post("admin/delete", [Admin::class, 'delete']);
+$routes->post("admin/authenticate", [Admin::class, 'authenticateCertificate']);
 
