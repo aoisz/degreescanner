@@ -35,10 +35,10 @@ class Scan extends BaseController
         else if($typeUploader === "information") {
             $information = [
                 'imageURL' => $this->request->getPost("inforImagePath"),
-                'name' => $this->request->getPost("studentName"),
+                'studentName' => $this->request->getPost("studentName"),
                 'birthDay' => $this->request->getPost("birthDay"),
-                'certTestDate' => $this->request->getPost("certTestDate"), 
-                'certExpiredDate' => $this->request->getPost("certExpiredDate")
+                'testDate' => $this->request->getPost("certTestDate"), 
+                'validUntil' => $this->request->getPost("certExpiredDate")
             ];
             $data = $information;
             $nextTypeUploader = "score";
