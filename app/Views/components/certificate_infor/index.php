@@ -34,12 +34,12 @@
 
 <script>
     const submitBtn = document.getElementById("submitBtn");
-    submitBtn.disabled = true;
-    // const imagePathInput = document.getElementById("imagePathInput");
-    // if(imagePathInput.value === "") {
-    //     submitBtn.disabled = true;
-    // }
-    // else {
-    //     submitBtn.disabled = false;
-    // }
+    // submitBtn.disabled = true;
+    const imagePathInput = document.getElementById("imagePathInput");
+    if(imagePathInput.value === "") {
+        submitBtn.disabled = true;
+    }
+    else {
+        submitBtn.disabled = false;
+    }
 </script>

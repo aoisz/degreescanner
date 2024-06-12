@@ -1,13 +1,14 @@
 <?php
     $haveImage = strlen($imagePath) > 0;
     $imageName =  $typeUploader.'.png';
+    $studentId = $_SESSION["student_id"];
 ?>
 <div role="button" class="dropContainer d-flex justify-content-center align-items-center" style="height: 75%; width: 35%;">
     <div class="body d-flex flex-column justify-content-center align-items-center">
         <i class="<?php echo $haveImage ? 'd-none' : '' ?> icon fa-regular fa-file-image mb-5"></i>
-        <img id="certificateImage" src="<?php echo $haveImage ? base_url('uploads/'.$imageName) : "" ?>" class="<?php echo $haveImage ? '' : 'd-none'?> img-fluid object-fit-contain ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|} mb-3" alt="image">
+        <img id="certificateImage" src="<?php echo $haveImage ? base_url('uploads/'.$studentId.'/'.$imageName) : "" ?>" class="<?php echo $haveImage ? '' : 'd-none'?> img-fluid object-fit-contain ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|} mb-3" alt="image">
         <span class="text-uppercase fs-5 w-75 text-center">Thả hoặc nhấn vào <span class=" text-decoration-underline text-info">đây</span> để chọn file</span>
-        <input form="processImage" id="imageFile" name="imageFile" type="file" accept="image/*" value="<?php echo $haveImage ? base_url('uploads/'.$imageName) : "" ?>">
+        <input form="processImage" id="imageFile" name="imageFile" type="file" accept="image/*" value="<?php echo $haveImage ? base_url('uploads/'.$studentId.'/'.$imageName) : "" ?>">
     </div>
 </div>
 <input id="submitImage" form="processImage" type="submit" class="d-none">

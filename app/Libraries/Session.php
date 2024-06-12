@@ -13,6 +13,11 @@ class Session {
 		return true;
 	}
 
+	function setFlashValue(string $key, $data) {
+		$this->session->setFlashdata($key, $data);
+		return true;
+	}
+
 	function getData($key) {
 		if($this->session->has($key)) {
 			return json_decode(json_encode($this->session->get($key)), true);

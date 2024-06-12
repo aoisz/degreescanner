@@ -19,24 +19,25 @@
         <div class="d-flex flex-norwrap p-0 h-100 w-100 position-relative">
             <?php
                 use App\Libraries\Session;
-
                 $session = new Session();
                 $data = isset($data) ? $data : [];
-                if(isset($scanError) && $scanError !== "") {
+                if(isset($_SESSION["upload_status"])) {
+                    if($_SESSION["upload_status"] == "uploaded") {
+                        echo '
+                            <div class="position-fixed top-0 w-100 d-flex justify-content-center">
+                                <div class="alert alert-primary alert-dismissible fade show pe-3" role="alert">
+                                    <strong>Cập nhật chứng chỉ thành công</strong>
+                                    <a href="#" class="close h4 text-decoration-none ms-2" data-dismiss="alert" aria-label="close" onclick="hide()">&times;</a>
+                                </div>
+                            </div>
+                        ';
+                    }
+                }
+                if(isset($_SESSION["scanError"]) && $_SESSION["scanError"] == true) {
                     echo '
                         <div class="position-fixed top-0 w-100 d-flex justify-content-center">
                             <div class="alert alert-danger alert-dismissible fade show pe-3" role="alert">
                                 <strong>Không nhận dạng được chứng chỉ! </strong> Vui lòng chọn ảnh có độ phân giải cao hơn.
-                                <a href="#" class="close h4 text-decoration-none ms-2" data-dismiss="alert" aria-label="close" onclick="hide()">&times;</a>
-                            </div>
-                        </div>
-                    ';
-                }
-                if(isset($updateSuccess) && $updateSuccess !== "") {
-                    echo '
-                        <div class="position-fixed top-0 w-100 d-flex justify-content-center">
-                            <div class="alert alert-primary alert-dismissible fade show pe-3" role="alert">
-                                <strong>Cập nhật chứng chỉ thành công</strong>
                                 <a href="#" class="close h4 text-decoration-none ms-2" data-dismiss="alert" aria-label="close" onclick="hide()">&times;</a>
                             </div>
                         </div>
@@ -65,7 +66,7 @@
                 </div>
                 <div class="body d-flex align-items-center justify-content-center flex-row w-100" style="height: 80%;">
                     <?php 
-                        echo view_cell("ImageUploader::show", ["imagePath" => isset($data["image"]) > 0 ? $data["image"] : "", "typeUploader" => $typeUploader]);
+                        echo view_cell("ImageUploader::show", ["imagePath" => isset($data["imageURL"]) > 0 ? $data["imageURL"] : "", "typeUploader" => $typeUploader]);
                         if($typeUploader === "full") {
                             echo view_cell(
                                 "CertificateInfor::showFullImagePicker", 

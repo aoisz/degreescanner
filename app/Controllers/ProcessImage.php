@@ -11,19 +11,20 @@ class ProcessImage extends BaseController {
     {
         $api = new APICall();
         $session = new Session();
+        $studentId = $session->getData("student_id");
         $typeUploader = $this->request->getPost("typeUploader");
         $imageName = $typeUploader.".png"; 
         $data = [];
         // Copy to public folder, CI4 can only access image from public folder
         $file = $this->request->getFile("imageFile");
-        $filePath = ROOTPATH.'public\uploads\\';
+        $filePath = ROOTPATH.'public\uploads\\' . $studentId . '\\';
         $file->move($filePath,$imageName,true);
         $filePath .= $imageName;
         if($typeUploader === "full") {
             $session->removeData("data");
             $postData = array(
                 'file_path' => $filePath,
-                'studentId' => "3120410019"
+                'studentId' => $studentId
             );
             $result = $api->postWithFile("/ocr/upload/full", $postData);
             $data = json_decode($result->getBody());
@@ -31,7 +32,7 @@ class ProcessImage extends BaseController {
         else if($typeUploader === "information") {
             $postData = array(
                 'file_path' => $filePath,
-                'studentId' => "3120410019"
+                'studentId' => $studentId
             );
             $result = $api->postWithFile("/ocr/upload/information", $postData);
             $data = json_decode($result->getBody(), true);
@@ -39,7 +40,7 @@ class ProcessImage extends BaseController {
         else if($typeUploader === "score") {
             $postData = array(
                 'file_path' => $filePath,
-                'studentId' => "3120410019"
+                'studentId' => $studentId
             );
             $result = $api->postWithFile("/ocr/upload/score", $postData);
             $data = json_decode($result->getBody(), true);
@@ -55,13 +56,13 @@ class ProcessImage extends BaseController {
             }
         }
         $data = json_decode(json_encode($data), true); // stdClass -> array
+        $session->setFlashValue("scanError", $scanError);
         return view(
             "Pages/Scan/index", 
             [
                 "typeUploader" => $typeUploader, 
                 "data" => $data,
                 "imagePath" => $filePath,
-                "scanError" => $scanError
             ]
         );
     }

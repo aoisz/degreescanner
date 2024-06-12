@@ -15,7 +15,6 @@ class Scan extends BaseController
                 "typeUploader" => isset($params["typeUploader"]) ? $params["typeUploader"] : "full",
                 "data" => isset($params["data"]) ? $params["data"] : [],
                 "updateSuccess" => isset($params["updateSuccess"]) ? $params["updateSuccess"] : "",
-                "scanError" => isset($params["scanError"]) ? $params["scanError"] : "",
             ]
         );
     }
@@ -68,12 +67,10 @@ class Scan extends BaseController
         }
         if($typeUploader === "score") {
             $postData = $session->getData("data");
-            $postData += ["studentId" => "3120410019"];
+            $postData += ["studentId" => $session->getData("student_id")];
             $isCreated = $api->post("/student_certificate/create", $postData);
-            return $this->index([
-                "typeUploader" => "full",
-                "updateSuccess" => true
-            ]);
+            $session->setFlashValue("upload_status", ($isCreated->getBody() === "true"));
+            return redirect()->route("scan");
         }
         else {
             return $this->index([
