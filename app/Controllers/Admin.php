@@ -10,7 +10,8 @@ class Admin extends BaseController
     {
         $session = new Session();
         if(isset($_SESSION["admin"])) {
-            return view("Pages/Admin/index");
+            $data = $this->getAllCertificate();
+            return view("Pages/Admin/index", ["data" => $data]);
         }
         else return redirect()->route("login");
     }
@@ -24,5 +25,32 @@ class Admin extends BaseController
 
     public function delete() {
         return view("pages/Admin/index", ["delete" => true]);
+    }
+
+    public function getAllCertificate(): string
+    {
+        $api = new APICall();
+        $response = $api->get('/student_certificate/getAll');
+        return $response->getBody();
+        // return view('Pages/Admin/index', ['data' => json_decode($response->getBody())]);
+    }
+
+    public function authenticateCertificate()
+    {
+        $api = new APICall();
+        $certId = $this->request->getPost("certId");
+        $statusValue = $this->request->getPost("statusValue");
+        $postData = [
+            "certId" => $certId,
+            "statusValue" => $statusValue
+        ];
+        $response = $api->postWithParams("/student_certificate/update_status", $postData);
+        if($response->getBody() === "true") {
+            return redirect()->route("admin");
+        }
+        else {
+
+        }
+        // echo json_encode($postData);
     }
 }

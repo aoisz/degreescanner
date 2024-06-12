@@ -20,9 +20,9 @@ class APICall {
         ]);
     }
 
-    function postWithBody(string $uri, $body) {
+    function postWithParams(string $uri, $body) {
         return $this->client->request('post', $uri, [
-            'body' => json_encode($body)
+            'form_params' => $body
         ]);
     }
 
