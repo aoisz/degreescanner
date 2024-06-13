@@ -48,9 +48,16 @@ class Admin extends BaseController
         if($response->getBody() === "true") {
             return redirect()->route("admin");
         }
-        else {
+    }
 
+    public function showStudents()
+    {
+        $session = new Session();
+        $api = new APICall();
+        $response = $api->get("/student/getAll");
+        if(isset($_SESSION["admin"])) {
+            return view("Pages/Admin/student_list", ["data" => $response->getBody()]);
         }
-        // echo json_encode($postData);
+        else return redirect()->route("login");
     }
 }

@@ -26,10 +26,10 @@ $routes->get('about', [About::class, 'index']);
 $routes->get('profile', [Student::class, 'index']);
 $routes->get('valid', [ValidCertificate::class, 'index']);
 $routes->get('certificate/(:num)', [[Certificate::class, 'index'], '$1']);
-$routes->get('delete/(:num)', [[History::class, 'delete'], '$1']);
 $routes->get('certificate/(:num)', [Certificate::class, 'index']);
 $routes->get('admin', [Admin::class, 'index']);
 $routes->get('admin/pending/(:num)', [[Admin::class, 'showPending'], '$1']);
+$routes->get('students', [Admin::class, 'showStudents']);
 // post
 $routes->post('valid', [ValidCertificate::class, 'index']);
 $routes->post('scan', [Scan::class, 'post']);
@@ -38,4 +38,5 @@ $routes->post('login/check', [Login::class, 'login']);
 $routes->post('about', [About::class, 'index']);
 $routes->post("admin/delete", [Admin::class, 'delete']);
 $routes->post("admin/authenticate", [Admin::class, 'authenticateCertificate']);
+$routes->post("delete", [History::class, 'delete']);
 

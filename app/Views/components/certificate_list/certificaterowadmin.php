@@ -38,9 +38,9 @@
             <!-- <div class="btn btn-light border-1 border-secondary-subtle px-4 py-2 me-4 pe-none bg-warning">
                 <a class="text-decoration-none text-black pe-none"><?= $status?></a>
             </div> -->
-            <div class="btn btn-light border-1 border-secondary-subtle px-4 py-2 me-4">
-                <a href="/certificate/<?= $id ?>/" class="text-decoration-none text-black">Xem</a>
-            </div>
+            <a href="/certificate/<?= $id ?>/"  class="btn btn-light border-1 border-secondary-subtle px-4 py-2 me-4">
+                <span class="text-decoration-none text-black">Xem</span>
+            </a>
         </div>
     </li>
     

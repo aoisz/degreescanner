@@ -68,7 +68,7 @@
                                 <label class="labels p-2">Trạng thái</label>
                                 <div class="dropdown w-100 d-flex justify-content-between">
                                     <button class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center" id="statusDropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:40%">
-                                        <span class="flex-1" id="dropdownValue">Xác nhận trạng thái</span> 
+                                        <span class="flex-1" id="dropdownValue">'.$data["status"]["name"].'</span> 
                                         <i id="dropdown-icon" class="d-flex align-items-center fa-solid fa-angle-down ms-2 mt-1"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="statusDropdownMenuButton">

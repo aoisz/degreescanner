@@ -26,9 +26,13 @@
     else if(isset($_SESSION["admin"])) {
         $sideBarList = [
             "admin" => [
-                "icon" => "fa-solid fa-user-tie",
-                "name" => "Quản trị viên"
-            ]
+                "icon" => "fa-solid fa-user-check",
+                "name" => "Xác thực chứng chỉ"
+            ],
+            "students" => [
+                "icon" => "fa-solid fa-users",
+                "name" => "Quản lí sinh viên"
+            ],
         ] + $sideBarList;
     }
     // echo json_encode($student);

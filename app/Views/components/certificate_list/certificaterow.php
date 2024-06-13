@@ -27,12 +27,16 @@
         <a href="/certificate/<?= $id ?>/" class="btn btn-secondary mx-1">
             <i class="fa-regular fa-eye"></i>
         </a>
-        <a href="/delete/<?= $id ?>/" class="btn btn-danger mx-1">
+        <button id="deleteButton" type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?php echo $id ?>">
             <i class="fa-solid fa-trash"></i>
-        </a>
+        </button>
     </div>
 </div>
 
 <style>
-
+    
 </style>
+
+<script>
+    
+</script>

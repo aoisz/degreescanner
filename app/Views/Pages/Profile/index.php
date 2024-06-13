@@ -65,7 +65,40 @@
                                           ';
                                       }
                                 ?>
+                                <div class="col-md-12 p-2 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changePwdModal">Đổi mật khẩu</button>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="changePwdModal" tabindex="-1" aria-labelledby="changePwdModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header d-flex">
+                            <h5 class="modal-title" id="changePwdModalLabel">Đổi mật khẩu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/changePassword" method="post">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Mật khẩu cũ:</label>
+                                    <input type="password" name="old_password" class="form-control" id="old_password">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Mật khẩu mới:</label>
+                                    <input type="password" name="new_password" class="form-control" id="new_password"></input>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Nhập lại mật khẩu mới:</label>
+                                    <input type="password" name="new_password_again" class="form-control" id="new_password_again"></input>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-primary">Lưu</button>
+                        </div>
                         </div>
                     </div>
                 </div>

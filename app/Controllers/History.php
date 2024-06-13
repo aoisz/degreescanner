@@ -35,9 +35,11 @@ class History extends BaseController
     }
 
     
-    public function delete($certificateId): RedirectResponse
+    public function delete()
     {
         $api = new APICall();
+        $certificateId = $this->request->getPost("id");
+        echo $certificateId;
         $response = $api->get('/student_certificate/delete/'.$certificateId);
         if($response->getBody()) {
             return redirect()->to("/history");
