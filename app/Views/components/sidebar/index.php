@@ -29,9 +29,9 @@
                 "icon" => "fa-solid fa-user-check",
                 "name" => "Xác thực chứng chỉ"
             ],
-            "students" => [
+            "accounts" => [
                 "icon" => "fa-solid fa-users",
-                "name" => "Quản lí sinh viên"
+                "name" => "Quản lí tài khoản"
             ],
         ] + $sideBarList;
     }

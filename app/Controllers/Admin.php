@@ -50,13 +50,43 @@ class Admin extends BaseController
         }
     }
 
-    public function showStudents()
+    public function showStudentAccounts()
     {
         $session = new Session();
         $api = new APICall();
-        $response = $api->get("/student/getAll");
+        $response = $api->get("/account/getAll");
         if(isset($_SESSION["admin"])) {
             return view("Pages/Admin/student_list", ["data" => $response->getBody()]);
+        }
+        else return redirect()->route("login");
+    }
+
+    public function search()
+    {
+        $api = new APICall();
+        $session = new Session();
+        if(isset($_SESSION["admin"])) {
+            $search_data = $this->request->getPost("search_data");
+            $search_status = $this->request->getPost("submit");
+            if($search_status === "search") {
+                $response = $api->postWithParams("/account/search", ["studentId" => $search_data]);
+                $session->setFlashValue("is_searching", $response->getBody());
+            }
+            return redirect()->route("accounts");
+        }
+        else return redirect()->route("login");
+    }
+
+    public function reset()
+    {
+        $api = new APICall();
+        $session = new Session();
+        if(isset($_SESSION["admin"])) {
+            $studentId = $this->request->getPost("studentId");
+            echo $studentId;
+            $response = $api->postWithParams("/account/reset", ["studentId" => $studentId]);
+            $session->setFlashValue("success", $response->getBody() === "true");
+            return redirect()->route("accounts");
         }
         else return redirect()->route("login");
     }

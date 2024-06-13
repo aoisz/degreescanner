@@ -21,9 +21,39 @@
                 use App\Libraries\Session;
                 $session = new Session();
                 echo view("components/sidebar/index");
+                $pwdChangeStatus = null;
             ?>
             <!-- container -->
-            <div class="container w-100 d-flex justify-content-center rounded bg-white mt-5 mb-5">
+            <div class="container w-100 d-flex justify-content-center rounded bg-white mt-5 mb-5 position-relative">
+                <?php
+                    if(isset($_SESSION["pwdChangeStatus"])) {
+                        $pwdChangeStatus = $_SESSION["pwdChangeStatus"];
+                        if($pwdChangeStatus === "updated") {
+                            echo '
+                                <div class="position-absolute alert alert-primary alert-dismissible fade show" role="alert">
+                                    <strong>Cập nhật mật khẩu thành công!</strong>
+                                    <a href="#" class="close h4 text-decoration-none " data-dismiss="alert" aria-label="close" onclick="hide()" style="padding-left:12px">&times;</a>
+                                </div>
+                            ';
+                        }
+                        else if($pwdChangeStatus === "old_wrong") {
+                            echo '
+                                <div class="position-absolute alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Mật khẩu cũ không chính xác</strong> Vui lòng kiểm tra lại mật khẩu.
+                                    <a href="#" class="close h4 text-decoration-none " data-dismiss="alert" aria-label="close" onclick="hide()" style="padding-left:12px">&times;</a>
+                                </div>
+                            ';
+                        }
+                        else if($pwdChangeStatus === "same") {
+                            echo '
+                                <div class="position-absolute alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Mật khẩu mới phải khác mật khẩu cũ</strong> Vui lòng kiểm tra lại mật khẩu.
+                                    <a href="#" class="close h4 text-decoration-none " data-dismiss="alert" aria-label="close" onclick="hide()" style="padding-left:12px">&times;</a>
+                                </div>
+                            ';
+                        }
+                    }
+                ?>
                 <div class="row w-100 d-flex justify-content-center">
                     <div class="col-md-3 border-right m-5">
                         <?php
@@ -39,12 +69,12 @@
                                 }
                                 echo '
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                        <img class="rounded-circle mt-5" width="250px" src="'.$src.'">
+                                        <img class="rounded-circle mt-5" width="250px" src="'.base_url($src).'">
                                         <h5 class="font-weight-bold p-4">'.$student->lastName. ' '. $student->firstName.'</h5>
                                     </div>
                                 ';
                             }
-                            ?>
+                        ?>
                     </div>
                     <div class="col-md-5 border-right">
                         <div class="p-3 py-5">
@@ -80,24 +110,20 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="/changePassword" method="post">
+                            <form action="/changePassword" method="post" id="change_pwd_form">
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Mật khẩu cũ:</label>
-                                    <input type="password" name="old_password" class="form-control" id="old_password">
+                                    <input class="form-control old_pwd_input" type="password" name="old_password" id="old_password" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Mật khẩu mới:</label>
-                                    <input type="password" name="new_password" class="form-control" id="new_password"></input>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Nhập lại mật khẩu mới:</label>
-                                    <input type="password" name="new_password_again" class="form-control" id="new_password_again"></input>
+                                    <input class="form-control new_pwd_input" type="password" name="new_password" id="new_password" required>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary">Lưu</button>
+                            <button form="change_pwd_form" type="submit" class="btn btn-primary" id="save_btn" disabled>Lưu</button>
                         </div>
                         </div>
                     </div>
@@ -105,4 +131,22 @@
             </div>
         </div>
     </body>
+
+    <script>
+        function hide() {
+            const note = document.querySelector('.alert');
+            console.log(note);
+            note.classList.remove("show");
+            note.remove();
+        }
+        const submitBtn = document.getElementById("save_btn");
+        document.getElementById("new_password").oninput = (e) => {
+            if(e.target.value.length > 8) {
+                submitBtn.disabled = false;
+            }
+            else {
+                submitBtn.disabled = true;
+            }
+        }
+    </script>
 </html>
